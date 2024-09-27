@@ -15,6 +15,8 @@ export class User {
   @IsEmail({}, { message: 'Debes proporcionar un correo válido' })
   email!: string;
 
+
+  // @Matches needs to use "validate" function from "class-validator" package when you want to register a user
   @Column()
   @Length(8, 14, { message: 'La contraseña debe tener entre 8 y 14 caracteres' })
   @Matches(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/, { 
