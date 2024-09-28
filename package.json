@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-migration": "npm run typeorm migration:generate -- -n MigrationName",
     "run-migration": "npm run typeorm migration:run",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "dev-debugg": "node --inspect-brk --watch --loader ts-node/esm src/index.ts"
   },
   "keywords": [],
   "author": "",

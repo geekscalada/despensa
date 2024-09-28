@@ -16,23 +16,16 @@ export class UserService {
     return this.userRepository.findById(id);
   }
 
-  //TODO: ¿partial peta, por qué?
   async createUser(userData: Partial<User>): Promise<User> {
-    try {
+    
       const createUserDTO = new CreateUserDTO(
         userData.nick!,
         userData.email!,
         userData.password!
       );
       const user = await createUserDTO.validatedUser();
-  
       return this.userRepository.create(user);
-    } catch (error) {
-      console.log("error: ", error);
-
-      return {} as User;
-
-    }
+    
   }
 
   async updateUser(id: number, userData: Partial<User>): Promise<User> {

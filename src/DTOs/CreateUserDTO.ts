@@ -20,11 +20,7 @@ export class CreateUserDTO {
     user.email = this.email;
     user.password = this.password;
 
-    const errors = await validate(user);
-    if (errors.length > 0) {
-      console.log("Tenemos errores....");
-      throw errors;
-    }
+    await validate(user);
 
     // Si todo es válido, devolvemos el objeto
     return {
