@@ -11,7 +11,8 @@
     "generate-migration": "npm run typeorm migration:generate -- -n MigrationName",
     "run-migration": "npm run typeorm migration:run",
     "typeorm": "typeorm-ts-node-commonjs",
-    "dev-debugg": "node --inspect-brk --watch --loader ts-node/esm src/index.ts"
+    "dev-debugg": "node --inspect-brk --watch --loader ts-node/esm src/index.ts",
+    "build-clean": "tsc --build "
   },
   "keywords": [],
   "author": "",
