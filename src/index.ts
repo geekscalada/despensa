@@ -8,11 +8,8 @@ import userRoutes from "./routes/userRoutes.ts";
 import { ErrorHandlerMiddleware } from "./middlewares/ErrorHandlerMiddleware.ts";
 import { TypeORMErrorHandlerMiddleware } from "./middlewares/TypeORMErrorHandlerMiddleware.ts";
 
-// TODO: implementar middleware para manejo de errores
-// TODO: errores custom, una interfaz para abstraer todas
-// TODO: jwt
+// TODO: jwt con rfresh token
 // TODO: TDD para nuevos servicios
-// TODO: implementar una interfaz para la librería de typeorm que te trae los errores de validación
 // TODO: uml para los nuevos casos de uso
 
 const app = express();
