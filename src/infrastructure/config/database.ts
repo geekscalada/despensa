@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
-import sanitizedConfig from "./dotenv.ts";
-import { User } from "../../entities/User.ts";
+import sanitizedConfig from "./dotenv";
+import { User } from "../../entities/User";
+import { Password } from "../../entities/Password";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -9,15 +10,13 @@ export const AppDataSource = new DataSource({
   username: sanitizedConfig.DB_USER,
   password: sanitizedConfig.DB_PASSWORD,
   database: sanitizedConfig.DB_NAME,
-  entities: [User], // Aquí se añaden las entidades
+  entities: [User, Password], // Aquí se añaden las entidades
   synchronize: true, // Solo en desarrollo; para producción es recomendable usar migraciones
   logging: true, // Habilitar logging para depurar
   dropSchema: true,
   migrationsRun: true,
-  migrations: ["src/migrations/*.ts"]
+  migrations: ["src/migrations/*"],
 });
-
-
 
 export const connectDB = async () => {
   try {

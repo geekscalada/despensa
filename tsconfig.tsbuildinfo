@@ -1,1 +1,20 @@
-{"root":["./src/index.ts","./src/DTOs/CreateUserDTO.ts","./src/controllers/UserController.ts","./src/entities/AlreadyExistsException.ts","./src/entities/NotNullException.ts","./src/entities/User.ts","./src/infrastructure/BaseException.ts","./src/infrastructure/config/database.ts","./src/infrastructure/config/dotenv.ts","./src/middlewares/ErrorHandlerMiddleware.ts","./src/middlewares/TypeORMErrorHandlerMiddleware.ts","./src/repositories/IUserRepository.ts","./src/repositories/UserRepository.ts","./src/routes/userRoutes.ts","./src/services/UserService.ts"],"version":"5.6.2"}
+{
+  "root": [
+    "./src/index",
+    "./src/DTOs/CreateUserDTO",
+    "./src/controllers/UserController",
+    "./src/entities/AlreadyExistsException",
+    "./src/entities/NotNullException",
+    "./src/entities/User",
+    "./src/infrastructure/BaseException",
+    "./src/infrastructure/config/database",
+    "./src/infrastructure/config/dotenv",
+    "./src/middlewares/ErrorHandlerMiddleware",
+    "./src/middlewares/TypeORMErrorHandlerMiddleware",
+    "./src/repositories/IUserRepository",
+    "./src/repositories/UserRepository",
+    "./src/routes/userRoutes",
+    "./src/services/UserService"
+  ],
+  "version": "5.6.2"
+}

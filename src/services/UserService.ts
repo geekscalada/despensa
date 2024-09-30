@@ -1,17 +1,18 @@
 // src/services/UserService.ts
-import { IUserRepository } from "../repositories/IUserRepository.ts";
-import { UserRepository } from "../repositories/UserRepository.ts";
-import { User } from "../entities/User.ts";
+import { IUserRepository } from "../repositories/IUserRepository";
+import { UserRepository } from "../repositories/UserRepository";
+import { User } from "../entities/User";
 import { validate } from "class-validator";
-import { CreateUserDTO } from "../DTOs/CreateUserDTO.ts";
-import { Password } from "../entities/Password.ts";
-import { AuthService } from "./AuthService.ts";
+import { CreateUserDTO } from "../DTOs/CreateUserDTO";
+import { Password } from "../entities/Password";
+import { AuthService } from "./AuthService";
+import { RegisterUserDTO } from "../DTOs/RegisterUserDTO";
 
 // create a Interface for this class
 export interface IUserService {
   findById(id: number): Promise<User | null>;
   findByEmail(email: string): Promise<User | null>;
-  registerUser(userData: Partial<User>): Promise<User>;
+  registerUser(userData: RegisterUserDTO): Promise<User>;
   updateUser(id: number, userData: Partial<User>): Promise<User>;
   deleteUser(id: number): Promise<void>;
 }
@@ -33,7 +34,8 @@ export class UserService implements IUserService {
     return this.userRepository.findByEmail(email);
   }
 
-  async registerUser(userData: Partial<User>): Promise<User> {
+  //TODO: change this any
+  async registerUser(userData: RegisterUserDTO): Promise<User> {
     //const hashedPassword = await bcrypt.hash(plainPassword, 10);
 
     // Crear nuevo usuario
@@ -45,12 +47,13 @@ export class UserService implements IUserService {
     const passwordEntity = new Password();
     passwordEntity.hash = hashedPassword;
 
-    const createUserDTO = new CreateUserDTO(
-      userData.nick!,
-      userData.email!,
-      userData.password!
-    );
+    const createUserDTO = new CreateUserDTO(userData.nick!, userData.email!);
     const user = await createUserDTO.validatedUser();
+
+    console.log("user: ", user);
+
+    user.password = passwordEntity;
+
     return this.userRepository.register(user);
   }
 

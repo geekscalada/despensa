@@ -3,10 +3,10 @@ import pkg from "body-parser";
 const { json } = pkg;
 
 import "reflect-metadata";
-import { connectDB } from "./infrastructure/config/database.ts";
-import userRoutes from "./routes/authRoutes.ts";
-import { ErrorHandlerMiddleware } from "./middlewares/ErrorHandlerMiddleware.ts";
-import { TypeORMErrorHandlerMiddleware } from "./middlewares/TypeORMErrorHandlerMiddleware.ts";
+import { connectDB } from "./infrastructure/config/database";
+import userRoutes from "./routes/authRoutes";
+import { ErrorHandlerMiddleware } from "./middlewares/ErrorHandlerMiddleware";
+import { TypeORMErrorHandlerMiddleware } from "./middlewares/TypeORMErrorHandlerMiddleware";
 
 // TODO: generate another table to passwords and change logic
 // TODO: TDD para nuevos servicios

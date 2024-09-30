@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { AuthService } from "../services/AuthService.ts";
-import { User } from "../entities/User.ts";
-import { UnauthorizedException } from "./UnauthorizedException.ts";
-import { InvalidTokenException } from "./InvalidTokenException.ts";
+import { AuthService } from "../services/AuthService";
+import { User } from "../entities/User";
+import { UnauthorizedException } from "./UnauthorizedException";
+import { InvalidTokenException } from "./InvalidTokenException";
 
 interface AuthenticatedRequest extends Request {
   user?: User;

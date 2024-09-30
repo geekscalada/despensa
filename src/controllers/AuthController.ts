@@ -1,13 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { AuthService } from "../services/AuthService.ts";
-import { UserService } from "../services/UserService.ts";
+import { AuthService } from "../services/AuthService";
+import { UserService } from "../services/UserService";
 import { User } from "../entities/User";
-import { create } from "domain";
-import { InvalidCredentialsException } from "../middlewares/InvalidCredentialsException.ts";
-import { InvalidTokenException } from "../middlewares/InvalidTokenException.ts";
-import { UserNotFoundException } from "../middlewares/UserNotFoundException.ts";
-import { UnauthorizedException } from "../middlewares/UnauthorizedException.ts";
-import { Password } from "../entities/Password.ts";
+
+import { InvalidCredentialsException } from "../middlewares/InvalidCredentialsException";
+import { UserNotFoundException } from "../middlewares/UserNotFoundException";
+import { UnauthorizedException } from "../middlewares/UnauthorizedException";
 
 export class AuthController {
   private authService: AuthService;
@@ -27,12 +25,14 @@ export class AuthController {
     next: NextFunction
   ): Promise<Response | void> {
     try {
+      //TODO: checkbody, parse?
+
       const { nick, email, password } = req.body;
 
-      const createdUser = await this.userService.registerUser({
+      const createdUser: User = await this.userService.registerUser({
         nick,
         email,
-        password: password,
+        password,
       });
 
       // Generar tokens

@@ -1,7 +1,7 @@
 import { getRepository, Repository } from "typeorm";
-import { User } from "../entities/User.ts";
+import { User } from "../entities/User";
 import { IUserRepository } from "./IUserRepository";
-import { AppDataSource } from "../infrastructure/config/database.ts";
+import { AppDataSource } from "../infrastructure/config/database";
 
 export class UserRepository implements IUserRepository {
   private readonly userRepository: Repository<User>;

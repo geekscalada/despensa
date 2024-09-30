@@ -7,7 +7,7 @@ import {
   OneToOne,
 } from "typeorm";
 import { IsEmail, Length, Matches } from "class-validator";
-import { Password } from "./Password.ts";
+import { Password } from "./Password";
 
 @Entity()
 @Unique("UQ_user_email", ["email"]) // El correo debe ser único + nombre constraint
