@@ -1,4 +1,4 @@
-import { BaseException } from "../infrastructure/BaseException.ts";
+import { BaseException } from "../../infrastructure/BaseException.ts";
 
 export class AlreadyExistsException extends BaseException {
   constructor(message: string, key?: string) {

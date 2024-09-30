@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { QueryFailedError } from "typeorm";
-import { AlreadyExistsException } from "../entities/AlreadyExistsException.ts";
+import { AlreadyExistsException } from "../entities/exceptions/AlreadyExistsException.ts";
 import { error } from "console";
 import { NotNullException } from "../entities/exceptions/NotNullException.ts";
 import { UnauthorizedException } from "./UnauthorizedException.ts";

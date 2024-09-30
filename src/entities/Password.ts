@@ -5,7 +5,7 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { User } from "./User";
+import { User } from "./User.ts";
 import { Length, Matches } from "class-validator";
 
 @Entity()

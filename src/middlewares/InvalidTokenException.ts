@@ -1,4 +1,4 @@
-import { BaseException } from "../infrastructure/BaseException";
+import { BaseException } from "../infrastructure/BaseException.ts";
 
 export class InvalidTokenException extends BaseException {
   constructor(message: string, customMessage?: string) {
