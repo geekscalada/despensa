@@ -8,8 +8,6 @@ import userRoutes from "./routes/authRoutes.ts";
 import { ErrorHandlerMiddleware } from "./middlewares/ErrorHandlerMiddleware.ts";
 import { TypeORMErrorHandlerMiddleware } from "./middlewares/TypeORMErrorHandlerMiddleware.ts";
 
-//todo: WRITE ON MY DIARY
-
 // TODO: generate another table to passwords and change logic
 // TODO: TDD para nuevos servicios
 // TODO: uml para los nuevos casos de uso
