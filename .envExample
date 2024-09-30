@@ -1,0 +1,17 @@
+# Archivo .env
+PORT=3000
+# Database
+DB_HOST=localhost
+DB_PORT=yourport
+DB_USER=youruser
+DB_PASSWORD=yourpass
+DB_NAME=yourDBName
+PGADMIN_DEFAULT_EMAIL=yourEmail
+PGADMIN_DEFAULT_PASSWORD=yourPass
+# JWT
+JWT_SECRET=your_secret_key_for_access_token
+JWT_REFRESH_SECRET=your_secret_key_for_refresh_token
+JWT_EXPIRES_IN=15m           
+JWT_REFRESH_EXPIRES_IN=7d     
+
+

@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  Unique,
+  AfterLoad,
+} from "typeorm";
 import { IsEmail, Length, Matches } from "class-validator";
+import { Exclude } from "class-transformer";
 
 @Entity()
 @Unique("UQ_user_email", ["email"]) // El correo debe ser único + nombre constraint
