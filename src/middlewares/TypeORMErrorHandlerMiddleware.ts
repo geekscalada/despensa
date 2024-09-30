@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { AlreadyExistsException } from "../entities/AlreadyExistsException.ts";
 import { ValidationError } from "class-validator";
 import { Not } from "typeorm";
-import { NotNullException } from "../entities/NotNullException.ts";
+import { NotNullException } from "../entities/exceptions/NotNullException.ts";
 
 export const TypeORMErrorHandlerMiddleware = (
   err: Error,

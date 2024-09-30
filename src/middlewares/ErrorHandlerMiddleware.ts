@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { QueryFailedError } from "typeorm";
 import { AlreadyExistsException } from "../entities/AlreadyExistsException.ts";
 import { error } from "console";
-import { NotNullException } from "../entities/NotNullException.ts";
+import { NotNullException } from "../entities/exceptions/NotNullException.ts";
 import { UnauthorizedException } from "./UnauthorizedException.ts";
 import { InvalidTokenException } from "./InvalidTokenException.ts";
 import { InvalidCredentialsException } from "./InvalidCredentialsException.ts";

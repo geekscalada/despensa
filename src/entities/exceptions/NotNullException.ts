@@ -1,4 +1,4 @@
-import { BaseException } from "../infrastructure/BaseException.ts";
+import { BaseException } from "../../infrastructure/BaseException.ts";
 
 export class NotNullException extends BaseException {
   constructor(message: string, emptyColumn?: string) {

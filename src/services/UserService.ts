@@ -4,6 +4,8 @@ import { UserRepository } from "../repositories/UserRepository.ts";
 import { User } from "../entities/User.ts";
 import { validate } from "class-validator";
 import { CreateUserDTO } from "../DTOs/CreateUserDTO.ts";
+import { Password } from "../entities/Password.ts";
+import { AuthService } from "./AuthService.ts";
 
 // create a Interface for this class
 export interface IUserService {
@@ -16,9 +18,11 @@ export interface IUserService {
 
 export class UserService implements IUserService {
   private userRepository: IUserRepository;
+  private authService: AuthService;
 
   constructor() {
     this.userRepository = new UserRepository();
+    this.authService = new AuthService();
   }
 
   async findById(id: number): Promise<User | null> {
@@ -30,6 +34,17 @@ export class UserService implements IUserService {
   }
 
   async registerUser(userData: Partial<User>): Promise<User> {
+    //const hashedPassword = await bcrypt.hash(plainPassword, 10);
+
+    // Crear nuevo usuario
+    const hashedPassword = await this.authService.hashPassword(
+      userData.password!
+    );
+
+    // Crear una instancia de Password
+    const passwordEntity = new Password();
+    passwordEntity.hash = hashedPassword;
+
     const createUserDTO = new CreateUserDTO(
       userData.nick!,
       userData.email!,

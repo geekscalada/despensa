@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { User } from "../entities/User";
 import { AppDataSource } from "../infrastructure/config/database";
+import { Password } from "../entities/Password";
 
 // TODO: generar una interfaz que envuelva a jwt para que sea más cambiable?
 // TODO: generar una interfaz del servicio AuthService
@@ -39,9 +40,9 @@ export class AuthService {
     }
   }
 
-  async hashPassword(password: string): Promise<string> {
+  async hashPassword(password: Password): Promise<string> {
     const salt = await bcrypt.genSalt(10);
-    return await bcrypt.hash(password, salt);
+    return await bcrypt.hash(password.hash, salt);
   }
 
   async comparePasswords(

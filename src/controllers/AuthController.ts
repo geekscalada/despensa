@@ -7,6 +7,7 @@ import { InvalidCredentialsException } from "../middlewares/InvalidCredentialsEx
 import { InvalidTokenException } from "../middlewares/InvalidTokenException.ts";
 import { UserNotFoundException } from "../middlewares/UserNotFoundException.ts";
 import { UnauthorizedException } from "../middlewares/UnauthorizedException.ts";
+import { Password } from "../entities/Password.ts";
 
 export class AuthController {
   private authService: AuthService;
@@ -19,6 +20,7 @@ export class AuthController {
 
   // Registro de usuarios
 
+  // TODO: llevar este método al controlador de User
   async registerUser(
     req: Request,
     res: Response,
@@ -27,13 +29,10 @@ export class AuthController {
     try {
       const { nick, email, password } = req.body;
 
-      // Crear nuevo usuario
-      const hashedPassword = await this.authService.hashPassword(password);
-
       const createdUser = await this.userService.registerUser({
         nick,
         email,
-        password: hashedPassword,
+        password: password,
       });
 
       // Generar tokens
@@ -57,7 +56,7 @@ export class AuthController {
       const user = await this.userService.findByEmail(email);
       if (
         !user ||
-        !(await this.authService.comparePasswords(password, user.password))
+        !(await this.authService.comparePasswords(password, user.password.hash))
       ) {
         throw new InvalidCredentialsException("Credenciales inválidas");
       }

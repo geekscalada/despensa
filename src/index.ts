@@ -11,7 +11,7 @@ import { TypeORMErrorHandlerMiddleware } from "./middlewares/TypeORMErrorHandler
 // TODO: generate another table to passwords and change logic
 // TODO: TDD para nuevos servicios
 // TODO: uml para los nuevos casos de uso
-adfsdafasdfdsafsdaffhghfghsfgasdfasdfdas;
+
 const app = express();
 app.use(json());
 
