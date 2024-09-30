@@ -8,7 +8,6 @@ import userRoutes from "./routes/authRoutes";
 import { ErrorHandlerMiddleware } from "./middlewares/ErrorHandlerMiddleware";
 import { TypeORMErrorHandlerMiddleware } from "./middlewares/TypeORMErrorHandlerMiddleware";
 
-// TODO: generate another table to passwords and change logic
 // TODO: TDD para nuevos servicios
 // TODO: uml para los nuevos casos de uso
 
