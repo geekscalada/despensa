@@ -4,11 +4,13 @@ const { json } = pkg;
 
 import "reflect-metadata";
 import { connectDB } from "./infrastructure/config/database.ts";
-import userRoutes from "./routes/userRoutes.ts";
+import userRoutes from "./routes/authRoutes.ts";
 import { ErrorHandlerMiddleware } from "./middlewares/ErrorHandlerMiddleware.ts";
 import { TypeORMErrorHandlerMiddleware } from "./middlewares/TypeORMErrorHandlerMiddleware.ts";
 
-// TODO: jwt con rfresh token
+//todo: WRITE ON MY DIARY
+
+// TODO: generate another table to passwords and change logic
 // TODO: TDD para nuevos servicios
 // TODO: uml para los nuevos casos de uso
 

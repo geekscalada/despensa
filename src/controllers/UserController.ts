@@ -10,23 +10,4 @@ export class UserController {
   constructor() {
     this.userService = new UserService();
   }
-
-  async createUser(req: Request, res: Response, next: NextFunction ): Promise<Response | void> {
-    try {
-      const { nick, email, password } = req.body;    
-        
-        const createdUser = await this.userService.createUser({
-          nick,
-          email,
-          password,
-        });
-        return res.status(201).json(createdUser);
-    } catch (error) {
-      next(error);
-      
-    }
-
-
-    
-  }
 }
