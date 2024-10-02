@@ -4,9 +4,10 @@ import {
   Column,
   Unique,
   AfterLoad,
+  OneToOne,
 } from "typeorm";
 import { IsEmail, Length, Matches } from "class-validator";
-import { Exclude } from "class-transformer";
+import { Password } from "./Password";
 
 @Entity()
 @Unique("UQ_user_email", ["email"]) // El correo debe ser único + nombre constraint
@@ -23,13 +24,6 @@ export class User {
   @IsEmail({}, { message: "Debes proporcionar un correo válido" })
   email!: string;
 
-  // @Matches needs to use "validate" function from "class-validator" package when you want to register a user
-  @Column()
-  @Length(8, 14, {
-    message: "La contraseña debe tener entre 8 y 14 caracteres",
-  })
-  @Matches(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/, {
-    message: "La contraseña debe tener al menos una mayúscula y un número",
-  })
-  password!: string;
+  @OneToOne(() => Password, (password) => password.user, { cascade: true })
+  password!: Password;
 }

@@ -1,12 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { AuthService } from "../services/AuthService.ts";
-import { UserService } from "../services/UserService.ts";
+import { AuthService } from "../services/AuthService";
+import { UserService } from "../services/UserService";
 import { User } from "../entities/User";
-import { create } from "domain";
-import { InvalidCredentialsException } from "../middlewares/InvalidCredentialsException.ts";
-import { InvalidTokenException } from "../middlewares/InvalidTokenException.ts";
-import { UserNotFoundException } from "../middlewares/UserNotFoundException.ts";
-import { UnauthorizedException } from "../middlewares/UnauthorizedException.ts";
+
+import { InvalidCredentialsException } from "../middlewares/InvalidCredentialsException";
+import { UserNotFoundException } from "../middlewares/UserNotFoundException";
+import { UnauthorizedException } from "../middlewares/UnauthorizedException";
 
 export class AuthController {
   private authService: AuthService;
@@ -19,21 +18,21 @@ export class AuthController {
 
   // Registro de usuarios
 
+  // TODO: llevar este método al controlador de User
   async registerUser(
     req: Request,
     res: Response,
     next: NextFunction
   ): Promise<Response | void> {
     try {
+      //TODO: checkbody, parse?
+
       const { nick, email, password } = req.body;
 
-      // Crear nuevo usuario
-      const hashedPassword = await this.authService.hashPassword(password);
-
-      const createdUser = await this.userService.registerUser({
+      const createdUser: User = await this.userService.registerUser({
         nick,
         email,
-        password: hashedPassword,
+        password,
       });
 
       // Generar tokens
@@ -51,13 +50,15 @@ export class AuthController {
     res: Response,
     next: NextFunction
   ): Promise<Response | void> {
+    console.log(req.body);
+
     const { email, password } = req.body;
 
     try {
-      const user = await this.userService.findByEmail(email);
+      const user = await this.userService.findByEmail(email, ["password"]);
       if (
         !user ||
-        !(await this.authService.comparePasswords(password, user.password))
+        !(await this.authService.comparePasswords(password, user.password.hash))
       ) {
         throw new InvalidCredentialsException("Credenciales inválidas");
       }

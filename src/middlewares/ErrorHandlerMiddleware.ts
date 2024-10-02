@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { QueryFailedError } from "typeorm";
-import { AlreadyExistsException } from "../entities/AlreadyExistsException.ts";
+import { AlreadyExistsException } from "../entities/exceptions/AlreadyExistsException";
 import { error } from "console";
-import { NotNullException } from "../entities/NotNullException.ts";
-import { UnauthorizedException } from "./UnauthorizedException.ts";
-import { InvalidTokenException } from "./InvalidTokenException.ts";
-import { InvalidCredentialsException } from "./InvalidCredentialsException.ts";
+import { NotNullException } from "../entities/exceptions/NotNullException";
+import { UnauthorizedException } from "./UnauthorizedException";
+import { InvalidTokenException } from "./InvalidTokenException";
+import { InvalidCredentialsException } from "./InvalidCredentialsException";
+import { ValidationException } from "../DTOs/ValidationException";
 
 //TODO: ¿Try to use something like switch case to force to use all the cases and avoid to forget one?
 
@@ -51,7 +52,12 @@ export const ErrorHandlerMiddleware = (
     return res.status(err.statusCode).json({ message: err.customMessage });
   }
 
+  if (err instanceof ValidationException) {
+    return res.status(err.statusCode).json({ message: err.customMessage });
+  }
+
   // Otros errores no manejados
+  console.log(err);
   return res.status(500).json({ message: "Server error" });
 };
 

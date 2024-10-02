@@ -3,22 +3,33 @@ import pkg from "body-parser";
 const { json } = pkg;
 
 import "reflect-metadata";
-import { connectDB } from "./infrastructure/config/database.ts";
-import userRoutes from "./routes/authRoutes.ts";
-import { ErrorHandlerMiddleware } from "./middlewares/ErrorHandlerMiddleware.ts";
-import { TypeORMErrorHandlerMiddleware } from "./middlewares/TypeORMErrorHandlerMiddleware.ts";
+import { connectDB } from "./infrastructure/config/database";
+import userRoutes from "./routes/authRoutes";
+import { ErrorHandlerMiddleware } from "./middlewares/ErrorHandlerMiddleware";
+import { TypeORMErrorHandlerMiddleware } from "./middlewares/TypeORMErrorHandlerMiddleware";
 
-// TODO: generate another table to passwords and change logic
 // TODO: TDD para nuevos servicios
 // TODO: uml para los nuevos casos de uso
-adfsdafasdfdsafsdaffhghfghsfg;
+
 const app = express();
+
+// Parse incoming requests data
 app.use(json());
 
 const startServer = async () => {
   try {
     await connectDB();
     console.log("Connected to the database");
+
+    // No CORS restrictions
+    app.use((req, res, next) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+      );
+      next();
+    });
 
     /**
      * ROUTES

@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "ES2022",
+    "module": "CommonJS",
     "moduleResolution": "Node",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "emitDecoratorMetadata": true, // Esta opción es obligatoria para que funcione el metadata de los decoradores
-    "experimentalDecorators": true // Habilitar decoradores en TypeScript
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

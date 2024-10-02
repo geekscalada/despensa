@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { User } from "../entities/User";
 import { AppDataSource } from "../infrastructure/config/database";
+import { Password } from "../entities/Password";
 
 // TODO: generar una interfaz que envuelva a jwt para que sea más cambiable?
 // TODO: generar una interfaz del servicio AuthService

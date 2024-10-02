@@ -1,4 +1,4 @@
-import { BaseException } from "../infrastructure/BaseException.ts";
+import { BaseException } from "../infrastructure/BaseException";
 
 export class InvalidCredentialsException extends BaseException {
   constructor(message: string, customMessage?: string) {
