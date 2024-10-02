@@ -12,12 +12,24 @@ import { TypeORMErrorHandlerMiddleware } from "./middlewares/TypeORMErrorHandler
 // TODO: uml para los nuevos casos de uso
 
 const app = express();
+
+// Parse incoming requests data
 app.use(json());
 
 const startServer = async () => {
   try {
     await connectDB();
     console.log("Connected to the database");
+
+    // No CORS restrictions
+    app.use((req, res, next) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+      );
+      next();
+    });
 
     /**
      * ROUTES

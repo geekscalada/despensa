@@ -11,7 +11,10 @@ import { RegisterUserDTO } from "../DTOs/RegisterUserDTO";
 // create a Interface for this class
 export interface IUserService {
   findById(id: number): Promise<User | null>;
-  findByEmail(email: string): Promise<User | null>;
+  findByEmail(
+    email: string,
+    relations?: Array<keyof User>
+  ): Promise<User | null>;
   registerUser(userData: RegisterUserDTO): Promise<User>;
   updateUser(id: number, userData: Partial<User>): Promise<User>;
   deleteUser(id: number): Promise<void>;
@@ -30,8 +33,11 @@ export class UserService implements IUserService {
     return this.userRepository.findById(id);
   }
 
-  async findByEmail(email: string): Promise<User | null> {
-    return this.userRepository.findByEmail(email);
+  async findByEmail(
+    email: string,
+    relations?: Array<keyof User>
+  ): Promise<User | null> {
+    return this.userRepository.findByEmail(email, relations);
   }
 
   //TODO: change this any

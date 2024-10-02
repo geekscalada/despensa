@@ -50,10 +50,12 @@ export class AuthController {
     res: Response,
     next: NextFunction
   ): Promise<Response | void> {
+    console.log(req.body);
+
     const { email, password } = req.body;
 
     try {
-      const user = await this.userService.findByEmail(email);
+      const user = await this.userService.findByEmail(email, ["password"]);
       if (
         !user ||
         !(await this.authService.comparePasswords(password, user.password.hash))
