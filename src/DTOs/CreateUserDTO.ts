@@ -1,8 +1,8 @@
 import { validate, ValidationError } from "class-validator";
-import { User } from "../entities/User";
-import { Password } from "../entities/Password";
+import { User } from "../domain/entities/User";
+import { Password } from "../domain/entities/Password";
 import { error } from "console";
-import { ValidationException } from "./exceptions/ValidationException";
+import { ValidationException } from "../app/exceptions/ValidationException";
 
 export class CreateUserDTO {
   readonly nick: string;

@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { AuthService } from "../services/AuthService";
-import { UserService } from "../services/UserService";
-import { User } from "../entities/User";
+import { AuthService } from "../app/services/AuthService";
+import { UserService } from "../app/services/UserService";
+import { User } from "../domain/entities/User";
 
-import { InvalidCredentialsException } from "../middlewares/exceptions/InvalidCredentialsException";
-import { UserNotFoundException } from "../middlewares/exceptions/UserNotFoundException";
-import { UnauthorizedException } from "../middlewares/exceptions/UnauthorizedException";
+import { InvalidCredentialsException } from "../infrastructure/middlewares/exceptions/InvalidCredentialsException";
+import { UserNotFoundException } from "../infrastructure/middlewares/exceptions/UserNotFoundException";
+import { UnauthorizedException } from "../infrastructure/middlewares/exceptions/UnauthorizedException";
 import { IAuthController } from "./IAuthController";
 
 export class AuthController implements IAuthController {

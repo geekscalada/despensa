@@ -1,5 +1,5 @@
 import "reflect-metadata"; // Necesario para TypeORM
-import app from "./app/app"; // Importamos la configuración de la aplicación
+import app from "./app"; // Importamos la configuración de la aplicación
 import { connectDB } from "./infrastructure/config/database";
 
 // Función para arrancar el servidor

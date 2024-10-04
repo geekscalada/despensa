@@ -1,10 +1,10 @@
 // src/controllers/UserController.ts
 import { NextFunction, Request, Response } from "express";
-import { UserService } from "../services/UserService";
+import { UserService } from "../app/services/UserService";
 
-import { AuthService } from "../services/AuthService";
-import { User } from "../entities/User";
-import { InvalidCredentialsException } from "../middlewares/exceptions/InvalidCredentialsException";
+import { AuthService } from "../app/services/AuthService";
+import { User } from "../domain/entities/User";
+import { InvalidCredentialsException } from "../infrastructure/middlewares/exceptions/InvalidCredentialsException";
 import { IUserController } from "./IUserController";
 
 export class UserController implements IUserController {
