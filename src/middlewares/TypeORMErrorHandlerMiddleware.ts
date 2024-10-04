@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { AlreadyExistsException } from "../entities/exceptions/AlreadyExistsException";
-import { ValidationError } from "class-validator";
-import { Not } from "typeorm";
+
 import { NotNullException } from "../entities/exceptions/NotNullException";
 
 export const TypeORMErrorHandlerMiddleware = (
@@ -10,7 +9,7 @@ export const TypeORMErrorHandlerMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  if (err instanceof AlreadyExistsException) {
+  if (err instanceof AlreadyExistsException) {    
     return res.status(err.statusCode).json({ message: err.customMessage });
   }
 

@@ -1,5 +1,5 @@
 import { ValidationError } from "class-validator";
-import { BaseException } from "../infrastructure/BaseException";
+import { BaseException } from "../../infrastructure/BaseException";
 
 export class ValidationException extends BaseException {
   constructor(message: string, errors: ValidationError[]) {

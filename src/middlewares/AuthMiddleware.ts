@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { AuthService } from "../services/AuthService";
 import { User } from "../entities/User";
-import { UnauthorizedException } from "./UnauthorizedException";
-import { InvalidTokenException } from "./InvalidTokenException";
+import { UnauthorizedException } from "./exceptions/UnauthorizedException";
+import { InvalidTokenException } from "./exceptions/InvalidTokenException";
 
 interface AuthenticatedRequest extends Request {
-  user?: User;
+  user?: Partial<User>;
 }
 
 export const AuthMiddleware = (
@@ -28,7 +28,7 @@ export const AuthMiddleware = (
       "Token inválido o expirado",
       "Token inválido o expirado"
     );
-  }
+  }  
 
   req.user = payload;
   next();

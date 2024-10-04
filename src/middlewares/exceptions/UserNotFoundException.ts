@@ -1,4 +1,4 @@
-import { BaseException } from "../infrastructure/BaseException";
+import { BaseException } from "../../infrastructure/BaseException";
 
 export class UserNotFoundException extends BaseException {
   constructor(message: string, customMessage?: string) {

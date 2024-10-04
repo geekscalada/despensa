@@ -1,54 +1,49 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { User } from "../entities/User";
-import { AppDataSource } from "../infrastructure/config/database";
-import { Password } from "../entities/Password";
+import { IAuthService } from "./IAuthService";
+import { ITokenService } from "./ITokenService";
+import { IPasswordService } from "./IPassWordService";
+import { JwtService } from "./JwtService";
+import { BcryptPasswordService } from "./BcryptPasswordService";
+import { TokenPayload } from "./ITokenPayload";
 
-// TODO: generar una interfaz que envuelva a jwt para que sea más cambiable?
-// TODO: generar una interfaz del servicio AuthService
+export class AuthService implements IAuthService {
+  private tokenService: ITokenService;
+  private passwordService: IPasswordService;
 
-export class AuthService {
+  constructor() {
+    this.tokenService = new JwtService();
+    this.passwordService = new BcryptPasswordService();
+  }
+
   generateAccessToken(user: User): string {
-    return jwt.sign(
-      { id: user.id, email: user.email, nick: user.nick },
-      process.env.JWT_SECRET!,
-      { expiresIn: process.env.JWT_EXPIRES_IN }
-    );
+    return this.tokenService.generateAccessToken(user);
   }
 
   generateRefreshToken(user: User): string {
-    return jwt.sign(
-      { id: user.id, email: user.email, nick: user.nick },
-      process.env.JWT_REFRESH_SECRET!,
-      { expiresIn: process.env.JWT_REFRESH_EXPIRES_IN }
-    );
+    return this.tokenService.generateRefreshToken(user);
   }
 
-  validateAccessToken(token: string): any {
-    try {
-      return jwt.verify(token, process.env.JWT_SECRET!);
-    } catch (err) {
-      return null;
-    }
+  validateAccessToken(token: string): TokenPayload | null {
+    return this.tokenService.validateAccessToken(token);
   }
 
-  validateRefreshToken(token: string): any {
-    try {
-      return jwt.verify(token, process.env.JWT_REFRESH_SECRET!);
-    } catch (err) {
-      return null;
-    }
+  validateRefreshToken(token: string): TokenPayload | null {
+    return this.tokenService.validateRefreshToken(token);
   }
 
   async hashPassword(password: string): Promise<string> {
-    const salt = await bcrypt.genSalt(10);
-    return await bcrypt.hash(password, salt);
+    return await this.passwordService.hashPassword(password);
   }
 
   async comparePasswords(
     password: string,
     hashedPassword: string
   ): Promise<boolean> {
-    return await bcrypt.compare(password, hashedPassword);
+    return await this.passwordService.comparePasswords(
+      password,
+      hashedPassword
+    );
   }
 }

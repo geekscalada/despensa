@@ -1,10 +1,8 @@
-//TODO: ¿podriamos usar simplemente UserDTO?
-
 import { validate, ValidationError } from "class-validator";
 import { User } from "../entities/User";
 import { Password } from "../entities/Password";
 import { error } from "console";
-import { ValidationException } from "./ValidationException";
+import { ValidationException } from "./exceptions/ValidationException";
 
 export class CreateUserDTO {
   readonly nick: string;

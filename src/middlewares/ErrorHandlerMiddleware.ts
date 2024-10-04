@@ -3,12 +3,11 @@ import { QueryFailedError } from "typeorm";
 import { AlreadyExistsException } from "../entities/exceptions/AlreadyExistsException";
 import { error } from "console";
 import { NotNullException } from "../entities/exceptions/NotNullException";
-import { UnauthorizedException } from "./UnauthorizedException";
-import { InvalidTokenException } from "./InvalidTokenException";
-import { InvalidCredentialsException } from "./InvalidCredentialsException";
-import { ValidationException } from "../DTOs/ValidationException";
+import { UnauthorizedException } from "./exceptions/UnauthorizedException";
+import { InvalidTokenException } from "./exceptions/InvalidTokenException";
+import { InvalidCredentialsException } from "./exceptions/InvalidCredentialsException";
+import { ValidationException } from "../DTOs/exceptions/ValidationException";
 
-//TODO: ¿Try to use something like switch case to force to use all the cases and avoid to forget one?
 
 export const ErrorHandlerMiddleware = (
   err: Error,
@@ -16,18 +15,19 @@ export const ErrorHandlerMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
+  //TODO: to add more direverError.code
   /**
-   * Conflict errors
+   * TYPEORM exceptions captured by another TypeORMMiddleware
    */
+
+  // Conflict
   if (err instanceof QueryFailedError && err.driverError.code === "23505") {
     const key = extractKey(err.driverError.detail);
 
     return next(new AlreadyExistsException(err.message, key));
   }
 
-  /**
-   * Not null errors
-   */
+  // Not null errors
   if (err instanceof QueryFailedError && err.driverError.code === "23502") {
     return next(new NotNullException(err.message, err.driverError.column));
   }
@@ -63,10 +63,10 @@ export const ErrorHandlerMiddleware = (
 
 function extractKey(text: string): string | string {
   const regex = /\(([^)]+)\)/; // Expresión regular para capturar texto entre paréntesis
-  const resultado = text.match(regex);
+  const result = text.match(regex);
 
-  if (resultado && resultado[1]) {
-    return resultado[1];
+  if (result && result[1]) {
+    return result[1];
   } else {
     return "";
   }
