@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import sanitizedConfig from "./dotenv";
-import { User } from "../../entities/User";
-import { Password } from "../../entities/Password";
+import { User } from "../../domain/entities/User";
+import { Password } from "../../domain/entities/Password";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
